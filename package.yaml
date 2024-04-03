@@ -1,0 +1,23 @@
+name:                FractalGenerator
+version:             0.1.0.0
+github:              "McAshesha/FractalGenerator"
+license:             BSD-3-Clause
+author:              "Ashesha"
+maintainer:          "v.kovalev2@g.nsu.ru"
+copyright:           "2025 Ashesha"
+
+dependencies:
+- base >= 4.7 && < 5
+
+ghc-options:
+- -Wall
+
+library:
+  source-dirs: src
+
+executables:
+  FractalGenerator-exe:
+    main:                Main.hs
+    source-dirs:         app
+    dependencies:
+      - FractalGenerator
