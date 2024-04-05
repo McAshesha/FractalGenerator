@@ -8,6 +8,7 @@ copyright:           "2025 Ashesha"
 
 dependencies:
 - base >= 4.7 && < 5
+- terminal-size
 
 ghc-options:
 - -Wall
