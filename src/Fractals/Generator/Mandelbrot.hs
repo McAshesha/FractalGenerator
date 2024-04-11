@@ -1,0 +1,29 @@
+module Fractals.Generator.Mandelbrot
+  ( generate
+  , mandelbrotIter
+  ) where
+
+import AsciiRenderer (Color(..))
+import Types (TerminalSize(..))
+import Data.Complex (Complex(..), magnitude)
+
+generate :: TerminalSize -> [[Color]]
+generate (TerminalSize (rows, cols)) =
+  [ [ Color (mandelbrotIter (x col :+ y row)) 50
+    | col <- [0..cols-1] ]
+  | row <- [0..rows-1] ]
+  where
+    x col
+      | cols <= 1  = -2.0
+      | otherwise  = -2.0 + (fromIntegral col / fromIntegral (cols - 1)) * 3.0
+    y row
+      | rows <= 1  = 1.0
+      | otherwise  = 1.0 - (fromIntegral row / fromIntegral (rows - 1)) * 2.0
+
+mandelbrotIter :: Complex Double -> Int
+mandelbrotIter c = go 0 0
+  where
+    go z iter
+      | iter >= 50 = 50
+      | magnitude z > 2 = iter
+      | otherwise = go (z^2 + c) (iter + 1)

@@ -5,6 +5,7 @@ module Fractals.Generator
 
 import Types (TerminalSize(..))
 import AsciiRenderer (Color(..))
+import qualified Fractals.Generator.Mandelbrot as Mandelbrot
 
 data FractalChoice
   = MandelbrotSet
@@ -12,8 +13,7 @@ data FractalChoice
   | SierpinskiTriangle
   deriving (Show, Eq, Enum, Bounded)
 
--- Dispatch: each constructor maps to its dedicated module.
--- Implementations are stubbed and will be filled in subsequent commits.
 generate :: FractalChoice -> TerminalSize -> [[Color]]
-generate _ (TerminalSize (rows, cols)) =
-  replicate rows (replicate cols (Color 0 1))
+generate choice size = case choice of
+  MandelbrotSet -> Mandelbrot.generate size
+  _             -> let (TerminalSize (r, c)) = size in replicate r (replicate c (Color 0 1))
