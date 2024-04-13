@@ -6,6 +6,7 @@ module Fractals.Generator
 import Types (TerminalSize(..))
 import AsciiRenderer (Color(..))
 import qualified Fractals.Generator.Mandelbrot as Mandelbrot
+import qualified Fractals.Generator.Julia as Julia
 
 data FractalChoice
   = MandelbrotSet
@@ -15,5 +16,6 @@ data FractalChoice
 
 generate :: FractalChoice -> TerminalSize -> [[Color]]
 generate choice size = case choice of
-  MandelbrotSet -> Mandelbrot.generate size
-  _             -> let (TerminalSize (r, c)) = size in replicate r (replicate c (Color 0 1))
+  MandelbrotSet      -> Mandelbrot.generate size
+  JuliaSet           -> Julia.generate size
+  SierpinskiTriangle -> let (TerminalSize (r, c)) = size in replicate r (replicate c (Color 0 1))
