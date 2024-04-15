@@ -5,6 +5,7 @@ module Fractals.Generator.Sierpinski
 import AsciiRenderer (Color(..))
 import Types (TerminalSize(..))
 import Data.Bits ((.&.), shiftR)
+import Control.Parallel.Strategies (using, parList, rdeepseq)
 
 generate :: TerminalSize -> [[Color]]
 generate (TerminalSize (rows, cols)) =
@@ -13,6 +14,7 @@ generate (TerminalSize (rows, cols)) =
       else Color 0 1  -- Background
     | col <- [0..cols-1] ]
   | row <- [0..rows-1] ]
+  `using` parList rdeepseq
   where
     -- Map terminal coordinates to [0, 1] range
     x col = fromIntegral col / fromIntegral (cols - 1)

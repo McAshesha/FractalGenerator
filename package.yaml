@@ -11,6 +11,7 @@ dependencies:
 - terminal-size
 - ansi-terminal >= 0.11
 - deepseq
+- parallel
 
 ghc-options:
 - -Wall

@@ -6,12 +6,14 @@ module Fractals.Generator.Julia
 import AsciiRenderer (Color(..))
 import Types (TerminalSize(..))
 import Data.Complex (Complex(..), magnitude)
+import Control.Parallel.Strategies (using, parList, rdeepseq)
 
 generate :: TerminalSize -> [[Color]]
 generate (TerminalSize (rows, cols)) =
   [ [ Color (juliaIter (x col :+ y row)) 100
     | col <- [0..cols-1] ]
   | row <- [0..rows-1] ]
+  `using` parList rdeepseq
   where
     x col
       | cols <= 1  = -1.5
