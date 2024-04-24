@@ -25,3 +25,17 @@ executables:
     source-dirs:         app
     dependencies:
       - FractalGenerator
+
+tests:
+  FractalGenerator-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - FractalGenerator
+    - hspec >= 2.11
+    - QuickCheck
+    - silently
