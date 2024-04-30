@@ -6,15 +6,44 @@ author:              "Ashesha"
 maintainer:          "v.kovalev2@g.nsu.ru"
 copyright:           "2025 Ashesha"
 
+extra-source-files:
+- README.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/McAshesha/FractalGenerator#readme>
+
 dependencies:
 - base >= 4.7 && < 5
+- transformers >= 0.6
+- directory
 - terminal-size
+- async
+- random
+- massiv >= 1.0
 - ansi-terminal >= 0.11
-- deepseq
+- monad-logger >= 0.3
+- text
 - parallel
+- deepseq
+- containers
+- array
 
 ghc-options:
 - -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wmissing-export-lists
+- -Wmissing-home-modules
+- -Wpartial-fields
+- -Wredundant-constraints
 
 library:
   source-dirs: src
@@ -23,6 +52,14 @@ executables:
   FractalGenerator-exe:
     main:                Main.hs
     source-dirs:         app
+    ghc-options:
+      - -Wall
+      - -Wcompat
+      - -Wincomplete-record-updates
+      - -Wredundant-constraints
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
     dependencies:
       - FractalGenerator
 
