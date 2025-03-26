@@ -41,6 +41,10 @@ render colors = do
   ANSI.clearScreen
   ANSI.setCursorPosition 0 0
   mapM_ renderRow colors
+  ANSI.setSGR [ANSI.Reset]
+  _ <- getLine  -- Wait for Enter to leave fractal view
+  ANSI.clearScreen
+  ANSI.setCursorPosition 0 0
   where
     renderRow row = do
       mapM_ renderPixel row

@@ -2,10 +2,13 @@ module CLI.UI
   ( displayWelcomeScreen
   , displayFractalMenu
   , renderScreen
+  , promptContinue
+  , displayConditions
   ) where
 
 import qualified System.Console.ANSI as ANSI
 import Fractals.Generator (FractalChoice(..))
+import Data.Char (toUpper)
 
 displayWelcomeScreen :: IO ()
 displayWelcomeScreen = do
@@ -21,7 +24,21 @@ displayWelcomeScreen = do
   putStrLn "            | |                                      "
   putStrLn "            |_|                                      "
   ANSI.setSGR [ANSI.Reset]
-  putStrLn "\nPlease maximize your terminal window and set the minimum font size in the settings."
+  putStrLn "\nFractalGenerator is a simple mathematical fractal generator"
+  putStrLn "that allows you to explore the beauty of mathematical fractals"
+  putStrLn "in a basic console mode. You will be presented with a selection of fractals,"
+  putStrLn "and you will need to choose the one that interests you."
+  putStrLn "Press <Enter> to continue..."
+  _ <- getLine
+  ANSI.clearScreen
+
+displayConditions :: IO ()
+displayConditions = do
+  ANSI.clearScreen
+  ANSI.setCursorPosition 0 0
+  putStrLn "For a more comfortable viewing experience of mathematical fractals,"
+  putStrLn "you should maximize the terminal window and select the smallest possible font size."
+  putStrLn "This will allow the fractal to be displayed in the terminal with the highest clarity."
   putStrLn "Press <Enter> to continue..."
   _ <- getLine
   ANSI.clearScreen
@@ -41,6 +58,22 @@ displayFractalMenu = do
   case reads choice of
     [(n, _)] | n >= 1 && n <= 3 -> return $ toEnum (n-1)
     _ -> displayFractalMenu
+
+promptContinue :: IO Bool
+promptContinue = do
+  putStrLn "Do you want to generate another fractal? Y(es)/N(o): "
+  input <- getLine
+  case map toUpper input of
+    "Y" -> pure True
+    "N" -> do
+      ANSI.clearScreen
+      ANSI.setCursorPosition 0 0
+      return False
+    _   -> do
+      ANSI.clearScreen
+      ANSI.setCursorPosition 0 0
+      putStrLn "Invalid input. Please enter Y or N."
+      promptContinue
 
 renderScreen :: [String] -> IO ()
 renderScreen rows = do
