@@ -2,7 +2,7 @@ module Main where
 
 import CLI.UI (displayWelcomeScreen, displayFractalMenu)
 import Fractals.Generator (generate)
-import AsciiRenderer (render)
+import AsciiRenderer (render, setANSIColor)
 import Utils (getTerminalSize)
 import Control.Exception (bracket)
 import System.Console.ANSI (hideCursor, showCursor)
@@ -16,6 +16,7 @@ main = bracket setup teardown $ \_ -> do
     Just size -> do
       let fractal = generate choice size
       render fractal
+      setANSIColor 7
       _ <- getLine
       return ()
     Nothing -> putStrLn "Error: Could not determine terminal size."

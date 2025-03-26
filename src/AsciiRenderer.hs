@@ -1,16 +1,41 @@
+{-# LANGUAGE DeriveGeneric, DeriveAnyClass #-}
+
 module AsciiRenderer
   ( render
   , Color(..)
+  , setANSIColor
   ) where
 
 import qualified System.Console.ANSI as ANSI
+import Control.DeepSeq (NFData(..))
+import GHC.Generics (Generic)
 
 data Color = Color
   { iterations :: Int
   , maxIterations :: Int
-  } deriving (Eq, Show)
+  } deriving (Eq, Show, Generic, NFData)
 
--- | Render a 2D grid of colors to the terminal
+setANSIColor :: Int -> IO ()
+setANSIColor idx = ANSI.setSGR
+  [ ANSI.SetColor ANSI.Foreground
+      ANSI.Dull
+      (colorMapping idx)
+  ]
+  where
+
+    -- Map our 0-7 index to ANSI colors
+    colorMapping :: Int -> ANSI.Color
+    colorMapping 0 = ANSI.Black
+    colorMapping 1 = ANSI.Red
+    colorMapping 2 = ANSI.Green
+    colorMapping 3 = ANSI.Yellow
+    colorMapping 4 = ANSI.Blue
+    colorMapping 5 = ANSI.Magenta
+    colorMapping 6 = ANSI.Cyan
+    colorMapping 7 = ANSI.White
+    colorMapping _ = ANSI.White  -- Default case
+
+-- Render a 2D grid of colors to the terminal
 render :: [[Color]] -> IO ()
 render colors = do
   ANSI.clearScreen
@@ -26,22 +51,3 @@ render colors = do
       let colorIdx = min 7 (floor (ratio * 8))  -- Ensure index is within 0-7
       setANSIColor colorIdx
       putStr "█"
-
-    setANSIColor :: Int -> IO ()
-    setANSIColor idx = ANSI.setSGR
-      [ ANSI.SetColor ANSI.Foreground
-          ANSI.Dull
-          (colorMapping idx)
-      ]
-
-    -- Map our 0-7 index to ANSI colors
-    colorMapping :: Int -> ANSI.Color
-    colorMapping 0 = ANSI.Black
-    colorMapping 1 = ANSI.Red
-    colorMapping 2 = ANSI.Green
-    colorMapping 3 = ANSI.Yellow
-    colorMapping 4 = ANSI.Blue
-    colorMapping 5 = ANSI.Magenta
-    colorMapping 6 = ANSI.Cyan
-    colorMapping 7 = ANSI.White
-    colorMapping _ = ANSI.White  -- Default case

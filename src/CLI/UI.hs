@@ -9,6 +9,8 @@ import Fractals.Generator (FractalChoice(..))
 
 displayWelcomeScreen :: IO ()
 displayWelcomeScreen = do
+  ANSI.clearScreen
+  ANSI.setCursorPosition 0 0
   ANSI.setSGR [ANSI.SetColor ANSI.Foreground ANSI.Vivid ANSI.Blue]
   putStrLn "  ______           _        _   _       _             "
   putStrLn " |  ____|         | |      | | | |     | |            "
@@ -19,7 +21,7 @@ displayWelcomeScreen = do
   putStrLn "            | |                                      "
   putStrLn "            |_|                                      "
   ANSI.setSGR [ANSI.Reset]
-  putStrLn "\nPlease maximize your terminal window."
+  putStrLn "\nPlease maximize your terminal window and set the minimum font size in the settings."
   putStrLn "Press <Enter> to continue..."
   _ <- getLine
   ANSI.clearScreen

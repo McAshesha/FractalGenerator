@@ -20,8 +20,6 @@ description:         Please see the README on GitHub at <https://github.com/McAs
 
 dependencies:
 - base >= 4.7 && < 5
-- containers
-- array
 - transformers >= 0.6
 - directory
 - terminal-size
@@ -31,6 +29,10 @@ dependencies:
 - ansi-terminal >= 0.11
 - monad-logger >= 0.3
 - text
+- parallel
+- deepseq
+- containers
+- array
 
 ghc-options:
 - -Wall

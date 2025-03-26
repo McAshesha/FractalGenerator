@@ -9,5 +9,5 @@ getTerminalSize :: IO (Maybe TerminalSize)
 getTerminalSize = do
   maybeWindow <- size
   pure $ case maybeWindow of
-    Just (Window rows cols) -> Just $ TerminalSize (rows, cols)
+    Just (Window rows cols) -> Just $ TerminalSize (rows - 1, cols)
     Nothing -> Nothing
