@@ -20,6 +20,7 @@
 snapshot:
   url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/23/16.yaml
 
+#resolver: lts-22.14  # Supports massiv-1.0.0.0
 # User packages to be built.
 # Various formats can be used as shown in the example below.
 #
