@@ -1,5 +1,6 @@
 module Fractals.Generator.Julia
   ( generate
+  , juliaIter
   ) where
 
 import AsciiRenderer (Color(..))

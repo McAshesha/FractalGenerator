@@ -75,3 +75,4 @@ tests:
     - FractalGenerator
     - hspec >= 2.11
     - QuickCheck
+    - silently

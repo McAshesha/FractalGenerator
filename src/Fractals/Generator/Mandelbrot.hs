@@ -1,5 +1,6 @@
 module Fractals.Generator.Mandelbrot
   ( generate
+  , mandelbrotIter
   ) where
 
 import AsciiRenderer (Color(..))
