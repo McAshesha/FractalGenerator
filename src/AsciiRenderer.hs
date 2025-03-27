@@ -2,6 +2,7 @@
 
 module AsciiRenderer
   ( render
+  , renderText
   , Color(..)
   , setANSIColor
   ) where
@@ -34,6 +35,21 @@ setANSIColor idx = ANSI.setSGR
     colorMapping 6 = ANSI.Cyan
     colorMapping 7 = ANSI.White
     colorMapping _ = ANSI.White  -- Default case
+
+renderText :: [[Color]] -> IO ()
+renderText colors = do
+  mapM_ renderRow colors
+  ANSI.setSGR [ANSI.Reset]
+  where
+    renderRow row = do
+      mapM_ renderPixel row
+      putStrLn ""
+
+    renderPixel color = do
+      let ratio = fromIntegral (iterations color) / fromIntegral (maxIterations color)
+      let colorIdx = min 7 (floor (ratio * 8))  -- Ensure index is within 0-7
+      setANSIColor colorIdx
+      if colorIdx /= 0 then putStr "█" else putStr " "
 
 -- Render a 2D grid of colors to the terminal
 render :: [[Color]] -> IO ()

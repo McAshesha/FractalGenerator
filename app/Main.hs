@@ -1,29 +1,36 @@
 module Main where
 
-import CLI.UI (displayWelcomeScreen, displayFractalMenu, promptContinue, displayConditions)
-import Fractals.Generator (generate)
-import AsciiRenderer (render)
+import CLI.UI (displayWelcomeScreen, displayFractalMenu, promptContinue, displayConditions, displayResultFractal, displayErrorSizeMsg)
 import Utils (getTerminalSize)
 import Control.Exception (bracket)
 import System.Console.ANSI (hideCursor, showCursor)
 
 main :: IO ()
 main = bracket setup teardown $ \_ -> do
-  displayWelcomeScreen
-  displayConditions
+  start
   loop
   where
-    loop = do
-      choice <- displayFractalMenu
+    start = do
       maybeSize <- getTerminalSize
       case maybeSize of
         Just size -> do
-          let fractal = generate choice size
-          render fractal
+          displayWelcomeScreen size
+          displayConditions
+        Nothing -> do
+         displayErrorSizeMsg
+         continue <- promptContinue
+         if continue then start else pure ()
+
+    loop = do
+      maybeSize <- getTerminalSize
+      case maybeSize of
+        Just size -> do
+          choice <- displayFractalMenu size
+          displayResultFractal choice size
           continue <- promptContinue
           if continue then loop else pure ()
         Nothing -> do
-          putStrLn "Error: Could not determine terminal size."
+          displayErrorSizeMsg
           continue <- promptContinue
           if continue then loop else pure ()
 

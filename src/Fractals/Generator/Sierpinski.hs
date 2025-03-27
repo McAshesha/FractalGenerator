@@ -6,7 +6,6 @@ import AsciiRenderer (Color(..))
 import Types (TerminalSize(..))
 import Data.Bits ((.&.), shiftR)
 import Control.Parallel.Strategies (using, parList, rdeepseq)
-import Control.DeepSeq (NFData(..))
 
 generate :: TerminalSize -> [[Color]]
 generate (TerminalSize (rows, cols)) =

@@ -1,29 +1,59 @@
 module CLI.UI
   ( displayWelcomeScreen
   , displayFractalMenu
+  , displayResultFractal
+  , displayErrorSizeMsg
   , renderScreen
   , promptContinue
   , displayConditions
   ) where
 
 import qualified System.Console.ANSI as ANSI
-import Fractals.Generator (FractalChoice(..))
+import Fractals.Generator (FractalChoice(..), generate, generateText)
 import Data.Char (toUpper)
+import AsciiRenderer (render, renderText)
+import Types (TerminalSize(..))
 
-displayWelcomeScreen :: IO ()
-displayWelcomeScreen = do
-  ANSI.clearScreen
-  ANSI.setCursorPosition 0 0
-  ANSI.setSGR [ANSI.SetColor ANSI.Foreground ANSI.Vivid ANSI.Blue]
-  putStrLn "  ______           _        _   _       _             "
-  putStrLn " |  ____|         | |      | | | |     | |            "
-  putStrLn " | |__ _ __ _ __ | |_ __ _| | | | __ _| | _____ _ __ "
-  putStrLn " |  __| '__| '_ \\| __/ _` | | | |/ _` | |/ / _ \\ '__|"
-  putStrLn " | |  | |  | |_) | || (_| | |_| | (_| |   <  __/ |   "
-  putStrLn " |_|  |_|  | .__/ \\__\\__,_|\\___/ \\__,_|_|\\_\\___|_|   "
-  putStrLn "            | |                                      "
-  putStrLn "            |_|                                      "
-  ANSI.setSGR [ANSI.Reset]
+displayResultFractal :: FractalChoice -> TerminalSize -> IO ()
+displayResultFractal choice size = do
+  let fractal = generate choice size
+  render fractal
+
+displayErrorSizeMsg :: IO ()
+displayErrorSizeMsg = putStrLn "Error: Could not determine terminal size."
+
+displayWelcomeLabel :: TerminalSize -> IO ()
+displayWelcomeLabel (TerminalSize (rows, cols)) = if rows <= 1200 && cols <= 300
+    then do
+      ANSI.clearScreen
+      ANSI.setCursorPosition 0 0
+      ANSI.setSGR [ANSI.SetColor ANSI.Foreground ANSI.Vivid ANSI.Blue]
+      putStrLn "_____________________    _____  _________________________  .____     "
+      putStrLn "\\_   _____/\\______   \\  /  _  \\ \\_   ___ \\__    ___/  _  \\ |    |    "
+      putStrLn " |    __)   |       _/ /  /_\\  \\/    \\  \\/ |    | /  /_\\  \\|    |    "
+      putStrLn " |     \\    |    |   \\/    |    \\     \\____|    |/    |    \\    |___ "
+      putStrLn " \\___  /    |____|_  /\\____|__  /\\______  /|____|\\____|__  /_______ \\"
+      putStrLn "     \\/            \\/         \\/        \\/               \\/        \\/"
+      putStrLn "  ___________________ _______  _____________________    ________________________ __________ "
+      putStrLn " /  _____/\\_   _____/ \\      \\ \\_   _____/\\______   \\  /  _  \\__    ___/\\_____  \\\\______   \\"
+      putStrLn "/   \\  ___ |    __)_  /   |   \\ |    __)_  |       _/ /  /_\\  \\|    |    /   |   \\|       _/"
+      putStrLn "\\    \\_\\  \\|        \\/    |    \\|        \\ |    |   \\/    |    \\    |   /    |    \\    |   \\"
+      putStrLn " \\______  /_______  /\\____|__  /_______  / |____|_  /\\____|__  /____|   \\_______  /____|_  /"
+      putStrLn "        \\/        \\/         \\/        \\/         \\/         \\/                 \\/       \\/ "
+      ANSI.setSGR [ANSI.Reset]
+    else do
+      let labelFractal = generateText "FRACTAL" 0.6 (TerminalSize (rows, cols))
+      let labelGENERATOR = generateText "GENERATOR" 0.6 (TerminalSize (rows, cols))
+      ANSI.clearScreen
+      ANSI.setCursorPosition 0 0
+      ANSI.setSGR [ANSI.SetColor ANSI.Foreground ANSI.Vivid ANSI.Blue]
+      renderText labelFractal
+      renderText labelGENERATOR
+
+
+displayWelcomeScreen :: TerminalSize -> IO ()
+displayWelcomeScreen size = do
+  displayWelcomeLabel size
   putStrLn "\nFractalGenerator is a simple mathematical fractal generator"
   putStrLn "that allows you to explore the beauty of mathematical fractals"
   putStrLn "in a basic console mode. You will be presented with a selection of fractals,"
@@ -45,8 +75,8 @@ displayConditions = do
 
 data MenuOption = Mandelbrot | Julia | Sierpinski deriving (Show, Enum, Bounded)
 
-displayFractalMenu :: IO FractalChoice
-displayFractalMenu = do
+displayFractalMenu :: TerminalSize -> IO FractalChoice
+displayFractalMenu size = do
   ANSI.clearScreen
   ANSI.setCursorPosition 0 0
   putStrLn "Choose a fractal:\n"
@@ -57,7 +87,7 @@ displayFractalMenu = do
   choice <- getLine
   case reads choice of
     [(n, _)] | n >= 1 && n <= 3 -> return $ toEnum (n-1)
-    _ -> displayFractalMenu
+    _ -> displayFractalMenu size
 
 promptContinue :: IO Bool
 promptContinue = do
