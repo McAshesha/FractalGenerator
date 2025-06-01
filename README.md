@@ -71,4 +71,3 @@ src/
 
 ## 📜 License
 MIT © 2023  —  Feel free to fork, modify, and create your own fractal universe!
-```
