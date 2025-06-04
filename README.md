@@ -27,11 +27,10 @@
 7. 🔧 [Extending the Project](#extending-the-project)
 8. 📚 [Key Dependencies](#key-dependencies)
 9. 📄 [License](#license)
-10. 📬 [Contact](#contact)
 
 ---
 
-## ❓ Why FractalGenerator?
+<h2 id="why-fractalgenerator">❓ Why FractalGenerator?</h2>
 
 > *“Mathematics, meet ANSI.”*
 >
@@ -43,20 +42,20 @@
 
 ---
 
-## ✨ Features
+<h2 id="features">✨ Features</h2>
 
 |                              | Description                                                                  |
 | ---------------------------- | ---------------------------------------------------------------------------- |
 | 🎮 **Interactive UI**        | ASCII‑art splash screen + guided menus (no cryptic flags).                   |
 | 🌌 **Multi‑fractal support** | Mandelbrot Set, Julia Set, Sierpinski Triangle — each with tweakable params. |
-| 🖥️ **Dynamic resize**       | Adapts to current terminal size via `terminal-size`.                         |
+| 🖥️ **Dynamic resize**        | Adapts to current terminal size via `terminal-size`.                         |
 | 🌈 **ANSI colours**          | Crisp coloured output powered by `ansi-terminal`.                            |
 | 🧪 **Test‑driven**           | `hspec` suite keeps renders & helpers honest.                                |
-| ⚡ **Parallel rendering**     | Leverages Haskell runtime for snappier Mandelbrots.                          |
+| ⚡ **Parallel rendering**    | Leverages Haskell runtime for snappier Mandelbrots.                          |
 
 ---
 
-## 🖼️ Screenshots
+<h2 id="screenshots">🖼️ Screenshots</h2>
 
 <p align="center">
   <img src="screenshots/start-page.jpg" alt="Start page" width="400"/>
@@ -69,7 +68,7 @@
 
 ---
 
-## 🚀 Getting Started
+<h2 id="getting-started">🚀 Getting Started</h2>
 
 ### 0. Prerequisites
 
@@ -99,7 +98,7 @@ stack test
 
 ---
 
-## 🗂️ Project Layout
+<h2 id="project-layout">🗂️ Project Layout</h2>
 
 ```text
 fractal-generator/
@@ -125,7 +124,7 @@ fractal-generator/
 
 ---
 
-## 🧩 Modules Breakdown
+<h2 id="modules-breakdown">🧩 Modules Breakdown</h2>
 
 | Module                 | Purpose                              |
 | ---------------------- | ------------------------------------ |
@@ -137,7 +136,7 @@ fractal-generator/
 
 ---
 
-## 🔧 Extending the Project
+<h2 id="extending-the-project">🔧 Extending the Project</h2>
 
 **Add your own fractal in 4 steps:**
 
@@ -150,7 +149,7 @@ Need tweaks? Iteration depth, colour palette, or viewport maths live right next 
 
 ---
 
-## 📚 Key Dependencies
+<h2 id="key-dependencies">📚 Key Dependencies</h2>
 
 | Package                                                              | Why                        |
 | -------------------------------------------------------------------- | -------------------------- |
@@ -162,7 +161,7 @@ Need tweaks? Iteration depth, colour palette, or viewport maths live right next 
 
 ---
 
-## 📄 License
+<h2 id="license">📄 License</h2>
 
 This repository is released under the **GNU License**.
 See [`LICENSE`](LICENSE) for the full text.
