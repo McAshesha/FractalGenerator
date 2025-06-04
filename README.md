@@ -1,73 +1,169 @@
-# 🌠 FractalGenerator: Haskell CLI Fractal Explorer  
+<h1 align="center">
+  🌠 FractalGenerator — Haskell CLI Fractal Explorer
+</h1>
 
-*A terminal-based fractal generator that combines mathematical beauty with ASCII art—built in Haskell with type-safe elegance!*  
+<p align="center">
+  <em>Terminal‑native playground for exploring mathematical fractals with type‑safe Haskell elegance.</em>
+</p>
 
-## ✨ Features  
-- **🎮 Interactive terminal UI**  
-  ASCII-art welcome screen, guided menus, and seamless navigation.  
-- **🌌 Multiple fractals**  
-  Render **Mandelbrot Set**, **Julia Set**, and **Sierpinski Triangle** with configurable parameters.  
-- **🖥️ Dynamic resizing**  
-  Adapts to your terminal dimensions for crisp rendering (thanks to `terminal-size`).  
-- **🌈 ANSI colors**  
-  Vibrant fractal displays powered by `ansi-terminal`.  
-- **🧪 Test-driven design**  
-  Built with Haskell best practices: type safety, parallelism, and `hspec` unit tests.  
+<p align="center">
+  <img src="https://img.shields.io/badge/status-%F0%9F%9A%80%20maintenance-brightgreen?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/language-Haskell-purple?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/UI-CLI%20%2F%20ASCII-blueviolet?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/fractals-Mandelbrot%20%E2%80%A2%20Julia%20%E2%80%A2%20Sierpinski-lightgrey?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/tests-hspec-success?style=for-the-badge"/>
+</p>
 
-## 🏗️ Project Structure  
-```bash  
-app/
-└── Main.hs
-test/
-└── Spec.hs
-src/
-├── Types.hs
-├── CLI/
-│   └── UI.hs
-├── Fractals/
-│   ├── Generator/
-│   │   ├── Mandelbrot.hs
-│   │   ├── Julia.hs
-│   │   └── Sierpinski.hs
-│   └── Generator.hs
-├── AsciiRenderer.hs
-└── Utils.hs
-```  
+---
 
-## 🚀 Quick Start
-1. **Install Stack**:
-   ```bash  
-   curl -sSL https://get.haskellstack.org/ | sh  
-   ```  
-2. **Run the app**:
-   ```bash  
-   stack run  # Follow on-screen menus to explore fractals!
-   ```  
+## Table of Contents
+
+1. ❓ [Why FractalGenerator?](#why-fractalgenerator)
+2. ✨ [Features](#features)
+3. 🖼️ [Screenshots](#screenshots)
+4. 🚀 [Getting Started](#getting-started)
+5. 🗂️ [Project Layout](#project-layout)
+6. 🧩 [Modules Breakdown](#modules-breakdown)
+7. 🔧 [Extending the Project](#extending-the-project)
+8. 📚 [Key Dependencies](#key-dependencies)
+9. 📄 [License](#license)
+10. 📬 [Contact](#contact)
+
+---
+
+## ❓ Why FractalGenerator?
+
+> *“Mathematics, meet ANSI.”*
+>
+> — some Haskell enjoyer, probably.
+
+* 🌌 **Math eye‑candy.** Render classic sets in seconds straight in your terminal.
+* ⛑️ **Type‑safe by design.** Strong static types keep your exploration crash‑free.
+* 🏗️ **Hack‑friendly.** Small, readable codebase — perfect for adding your own fractals.
+
+---
+
+## ✨ Features
+
+|                              | Description                                                                  |
+| ---------------------------- | ---------------------------------------------------------------------------- |
+| 🎮 **Interactive UI**        | ASCII‑art splash screen + guided menus (no cryptic flags).                   |
+| 🌌 **Multi‑fractal support** | Mandelbrot Set, Julia Set, Sierpinski Triangle — each with tweakable params. |
+| 🖥️ **Dynamic resize**       | Adapts to current terminal size via `terminal-size`.                         |
+| 🌈 **ANSI colours**          | Crisp coloured output powered by `ansi-terminal`.                            |
+| 🧪 **Test‑driven**           | `hspec` suite keeps renders & helpers honest.                                |
+| ⚡ **Parallel rendering**     | Leverages Haskell runtime for snappier Mandelbrots.                          |
+
+---
+
+## 🖼️ Screenshots
+
+<p align="center">
+  <img src="screenshots/start-page.jpg" alt="Start page" width="400"/>
+  <img src="screenshots/mandelbrot.jpg" alt="Mandelbrot Set" width="400"/>
+  <img src="screenshots/julia.jpg" alt="Julia Set" width="400"/>
+  <img src="screenshots/triangle.jpg" alt="Sierpinski Triangle" width="400"/>
+</p>
+
+> *All images captured straight from the terminal; no post‑processing.*
+
+---
+
+## 🚀 Getting Started
+
+### 0. Prerequisites
+
+| Tool      | Tested version | Notes                      |
+| --------- | -------------- | -------------------------- |
+| **GHC**   | 9.6+           | via `ghcup` or Stack       |
+| **Stack** | `2.15.5`       | easiest way to build & run |
+
+### 1. Clone
+
+```bash
+git clone https://github.com/your-user/fractal-generator.git
+cd fractal-generator
+```
+
+### 2. Run the app
+
+```bash
+stack run        # follow on‑screen menus to explore!
+```
+
+### 3. Run tests (optional)
+
+```bash
+stack test
+```
+
+---
+
+## 🗂️ Project Layout
+
+```text
+fractal-generator/
+├── app/                 # Main entry point
+│   └── Main.hs
+├── src/
+│   ├── AsciiRenderer.hs
+│   ├── Types.hs
+│   ├── Utils.hs
+│   ├── CLI/
+│   │   └── UI.hs
+│   └── Fractals/
+│       ├── Generator.hs
+│       └── Generator/
+│           ├── Mandelbrot.hs
+│           ├── Julia.hs
+│           └── Sierpinski.hs
+├── test/
+│   └── Spec.hs
+├── screenshots/         # PNG/JPG captures used in README
+└── README.md            # you’re reading it
+```
+
+---
 
 ## 🧩 Modules Breakdown
-| Module                  | Purpose                                  |  
-|-------------------------|------------------------------------------|  
-| `CLI.UI`                | Handles menus, prompts, and ASCII art UI |  
-| `Fractals.Generator.*`  | Math logic for each fractal type         |  
-| `AsciiRenderer`         | Converts fractal data to colored ASCII   |  
-| `Utils`                 | Terminal size detection                  |  
-| `Types`                 | Shared data types (e.g., `TerminalSize`) |  
 
-## 📚 Key Dependencies
-- [`ansi-terminal`](https://hackage.haskell.org/package/ansi-terminal): ANSI color support
-- [`terminal-size`](https://hackage.haskell.org/package/terminal-size): Dynamic terminal resizing
-- [`hspec`](https://hackage.haskell.org/package/hspec): Unit testing framework
+| Module                 | Purpose                              |
+| ---------------------- | ------------------------------------ |
+| `CLI.UI`               | Menus, prompts, YAML‑like ASCII logo |
+| `Fractals.Generator.*` | Math / iteration logic per fractal   |
+| `AsciiRenderer`        | Maps iteration counts → RGB pairs    |
+| `Utils`                | Terminal size + misc helpers         |
+| `Types`                | Shared newtypes & records            |
+
+---
 
 ## 🔧 Extending the Project
-**Adding a new fractal**:
-1. Create a module under `Fractals/Generator/` (e.g., `KochSnowflake.hs`).
-2. Implement the `generate` function with your fractal logic.
-3. Extend the `FractalChoice` type in `Generator.hs`.
-4. Update `displayFractalMenu` in `CLI.UI` to include your new option.
 
-**Tweaking parameters**:
-- Modify iteration limits in `Mandelbrot.hs`/`Julia.hs`.
-- Adjust color mappings in `AsciiRenderer.hs`.
+**Add your own fractal in 4 steps:**
 
-## 📜 License
-MIT © 2023  —  Feel free to fork, modify, and create your own fractal universe!
+1. `src/Fractals/Generator/<YourFractal>.hs` — implement `generate`.
+2. Extend the `FractalChoice` ADT in `Generator.hs` + pattern‑match.
+3. Add a menu entry in `displayFractalMenu` inside `CLI.UI`.
+4. Drop a screenshot in `screenshots/` and send a PR. 🚀
+
+Need tweaks? Iteration depth, colour palette, or viewport maths live right next to each fractal module.
+
+---
+
+## 📚 Key Dependencies
+
+| Package                                                              | Why                        |
+| -------------------------------------------------------------------- | -------------------------- |
+| [`ansi-terminal`](https://hackage.haskell.org/package/ansi-terminal) | Colourful output           |
+| [`terminal-size`](https://hackage.haskell.org/package/terminal-size) | Window resize detection    |
+| [`mtl`](https://hackage.haskell.org/package/mtl)                     | Reader / State niceties    |
+| [`parallel`](https://hackage.haskell.org/package/parallel)           | Fork/Join for faster plots |
+| [`hspec`](https://hackage.haskell.org/package/hspec)                 | Test framework             |
+
+---
+
+## 📄 License
+
+GNU GPL‑3.0 © 2023‑present — free to fork, tweak, and generate your own fractal universe.
+
+> *Found a bug? File an issue — I’m keeping an eye on them and happy to fix!* 🐛
