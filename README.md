@@ -164,6 +164,7 @@ Need tweaks? Iteration depth, colour palette, or viewport maths live right next 
 
 ## 📄 License
 
-GNU GPL‑3.0 © 2023‑present — free to fork, tweak, and generate your own fractal universe.
+This repository is released under the **GNU License**.
+See [`LICENSE`](LICENSE) for the full text.
 
 > *Found a bug? File an issue — I’m keeping an eye on them and happy to fix!* 🐛
