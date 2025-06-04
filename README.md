@@ -60,7 +60,7 @@
 
 <p align="center">
   <img src="screenshots/start-page.jpg" alt="Start page" width="400"/>
-  <img src="screenshots/mandelbrot.jpg" alt="Mandelbrot Set" width="400"/>
+  <img src="screenshots/maldebrot.jpg" alt="Mandelbrot Set" width="400"/>
   <img src="screenshots/julia.jpg" alt="Julia Set" width="400"/>
   <img src="screenshots/triangle.jpg" alt="Sierpinski Triangle" width="400"/>
 </p>
