@@ -1,5 +1,5 @@
 <h1 align="center">
-  🌠 FractalGenerator — Haskell CLI Fractal Explorer
+  🌠 Fractal Generator — Haskell CLI Fractal Explorer
 </h1>
 
 <p align="center">
