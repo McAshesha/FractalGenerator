@@ -161,9 +161,4 @@ Need tweaks? Iteration depth, colour palette, or viewport maths live right next 
 
 ---
 
-<h2 id="license">📄 License</h2>
-
-This repository is released under the **GNU License**.
-See [`LICENSE`](LICENSE) for the full text.
-
 > *Found a bug? File an issue — I’m keeping an eye on them and happy to fix!* 🐛
